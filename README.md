@@ -12,7 +12,7 @@ h2hk は、ひらがなを半角カタカナに変換するシンプルなコマ
 ### Goがインストールされている場合
 
 ```go
-go install github.com/yourname/h2hk@latest
+go install github.com/salmoncode/h2hk@latest
 ```
 
 ### GitHubからcloneしてビルドする場合
