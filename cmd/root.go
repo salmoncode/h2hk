@@ -35,7 +35,7 @@ var zenkakuToHankaku = strings.NewReplacer(
 
 var rootCmd = &cobra.Command{
 	Use:   "h2hk",
-	Short: "A brief description of your application",
+	Short: "Convert Hiragana to half-width Katakana",
 	Run: func(cmd *cobra.Command, args []string) {
 		if len(args) < 1 {
 			fmt.Println("Usage: h2hk <text>")
