@@ -53,23 +53,24 @@ func buildZenkakuToHankakuReplacer() *strings.Replacer {
 		"「": "｢", "」": "｣", "゛": "ﾞ", "゜": "ﾟ", "　": " ",
 	}
 
+	// Helper function to add mappings to the replacements slice
+	addMappings := func(replacements []string, mappings map[string]string) []string {
+		for k, v := range mappings {
+			replacements = append(replacements, k, v)
+		}
+		return replacements
+	}
+
+	// Calculate total capacity needed (2 strings per mapping: key + value)
+	totalMappings := len(basicMappings) + len(voicedMappings) + len(semiVoicedMappings) + len(smallMappings) + len(symbolMappings)
+	replacements := make([]string, 0, totalMappings*2)
+
 	// Combine all mappings into a single slice for the replacer
-	var replacements []string
-	for k, v := range basicMappings {
-		replacements = append(replacements, k, v)
-	}
-	for k, v := range voicedMappings {
-		replacements = append(replacements, k, v)
-	}
-	for k, v := range semiVoicedMappings {
-		replacements = append(replacements, k, v)
-	}
-	for k, v := range smallMappings {
-		replacements = append(replacements, k, v)
-	}
-	for k, v := range symbolMappings {
-		replacements = append(replacements, k, v)
-	}
+	replacements = addMappings(replacements, basicMappings)
+	replacements = addMappings(replacements, voicedMappings)
+	replacements = addMappings(replacements, semiVoicedMappings)
+	replacements = addMappings(replacements, smallMappings)
+	replacements = addMappings(replacements, symbolMappings)
 
 	return strings.NewReplacer(replacements...)
 }
